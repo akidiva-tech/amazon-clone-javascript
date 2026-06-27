@@ -1,3 +1,6 @@
+//import moneyConverter form utils 
+import {formatCurrency} from './utils/money.js'
+
 //import cart since it contains the products id and quantity that the usere picked
 import {cart} from '../data/cart.JS'
 // import products.js since we have the id and i want to retrieve all the product's details 
@@ -34,7 +37,7 @@ cartSummaryHTML +=`
                   ${matchingItem.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingItem.priceCents/100).toFixed(2)   }
+                  $${formatCurrency(matchingItem.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
