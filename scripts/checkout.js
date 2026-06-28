@@ -2,7 +2,7 @@
 import {formatCurrency} from './utils/money.js'
 
 //import cart since it contains the products id and quantity that the usere picked
-import {cart} from '../data/cart.JS'
+import {cart, removeFromCart} from '../data/cart.JS'
 // import products.js since we have the id and i want to retrieve all the product's details 
 import {products} from '../data/products.JS'
 //I'm looking for a certain product id 
@@ -46,7 +46,7 @@ cartSummaryHTML +=`
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingItem.id}">
                     Delete
                   </span>
                 </div>
@@ -101,5 +101,13 @@ cartSummaryHTML +=`
 ` 
 
 })
-console.log(cartSummaryHTML)
+
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML; 
+document.querySelectorAll('.js-delete-link').forEach((link)=>{
+link.addEventListener('click', ()=>{
+  const productId = link.dataset.productId;
+  removeFromCart(productId);
+  console.log(cart);
+})
+})
+
